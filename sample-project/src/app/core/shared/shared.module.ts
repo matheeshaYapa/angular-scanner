@@ -1,24 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
-import { SlideshowModule } from 'ng-simple-slideshow';
 import { MaterialModule } from './material.module';
 
-
-
-import {NgImageSliderModule} from 'ng-image-slider';
-import {MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import {DateAdapter as MDateAdapter} from '@angular/material/core';
-import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter} from '@angular/material-moment-adapter';
-
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { NgSelectModule } from '@ng-select/ng-select';
-import { CalendarComponent } from '@global/first-phase-global-components/common-components/calendar/calendar.component';
-
+import {MAT_DATE_FORMATS} from '@angular/material/core';
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 export const MY_FORMATS = {
   parse: {
@@ -34,43 +20,22 @@ export const MY_FORMATS = {
 
 @NgModule({
   declarations: [
-    CalendarComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
-    NgbModule,
-    FlexLayoutModule,
     ReactiveFormsModule,
     FormsModule,
-    NgxMaterialTimepickerModule,
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory
-    }),
-    NgSelectModule,
+    FlexLayoutModule
   ],
   exports: [
     CommonModule,
     MaterialModule,
-    NgbModule,
-    FlexLayoutModule,
     ReactiveFormsModule,
-    NgImageSliderModule,
     FormsModule,
-    NgxMaterialTimepickerModule,
-    // FontAwesomeModule,
-    SlideshowModule,
-    CalendarComponent,
-    NgSelectModule,
+    FlexLayoutModule
   ],
   providers: [
-    {
-      provide: MDateAdapter,
-      useClass: MomentDateAdapter,
-      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
-    },
-
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
   ],
 

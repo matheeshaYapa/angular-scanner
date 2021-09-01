@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GlobalLabelComponent } from './global-label.component';
+import { GlobalLabelComponent } from './pages/global-label.component';
 
 
 
