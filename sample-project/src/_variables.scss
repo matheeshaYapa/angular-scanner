@@ -1,0 +1,33 @@
+//Side Navigation
+$sidenav-background-light-color:#364455;
+$sidenav-background-dark-color:#2c3846;
+$sidenav-logo-background-dark-color: $sidenav-background-dark-color;
+$sidenav-text-color: #cfcfcf;
+$sidenav-a-active-header-color:#36c6d3;
+$sidenav-a-active-color:white;
+$sidenav-a-active-background:#36c6d3;
+$sidenav-a-active-hover-color: white;
+$sidenav-a-active-hover-background:#36c6d3;
+
+
+//Header Toolbar
+$header-toolbar-color: $sidenav-background-light-color;
+
+//breadcrumb
+$breadcrumb-color: #c7c7c7;
+$breadcrumb-active-color: $sidenav-a-active-color;
+
+//Side Nav
+$box-shadow-1: 0 2px 1px -1px rgba(0, 0, 0, .2),
+0 1px 1px 0 rgba(0, 0, 0, .14),
+0 1px 3px 0 rgba(0, 0, 0, .12);
+$box-shadow-2: 0 2px 5px 0 rgba(0, 0, 0, .16),
+0 2px 10px 0 rgba(0, 0, 0, .12);
+//Header Toolbar
+$box-shadow-3: 0 3px 5px -1px rgba(0, 0, 0, .2),
+0 6px 10px 0 rgba(0, 0, 0, .14),
+0 1px 18px 0 rgba(0, 0, 0, .12);
+//Page Card
+$box-shadow-4: 0 2px 1px -1px rgba(0, 0, 0, .2),
+0 1px 1px 0 rgba(0, 0, 0, .14),
+0 1px 3px 0 rgba(0, 0, 0, .12);
