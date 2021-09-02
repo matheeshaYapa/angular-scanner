@@ -1,3 +1,15 @@
+<mat-toolbar color="primary">
+  <span>
+    <a routerLink="/protected">Dashboard</a>
+  </span>
+  <span class="spacer"></span>
+  <ul>
+    <li>
+      <a mat-button routerLink="sample" routerLinkActive="mat-accent">Sample</a>
+    </li>
+  </ul>
+</mat-toolbar>
+
 <main fxLayout="column">
   <div class="main-content-wrapper">
     <router-outlet></router-outlet>

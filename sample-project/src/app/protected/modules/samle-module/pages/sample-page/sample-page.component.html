@@ -1,1 +1,193 @@
-<p>sample-page works!</p>
+<section class="page-wrapper">
+  <div class="grid-container">
+    <h1>Update Bank Details</h1>
+
+    <mat-card class="my-3">
+      <mat-card-header>
+        <mat-card-title>
+          <h2>Beneficiary Details</h2>
+        </mat-card-title>
+      </mat-card-header>
+
+      <div class="grid-container" [formGroup]="bankForm">
+        <div fxLayout="row" fxLayoutGap="1rem" class="w-100 mb-5">
+          <div fxLayout="column" class="w-100">
+            <app-global-label class="w-100 my-2"
+                            inputValue="{{personData?.prefix || ''}} {{personData?.person_ref_no || '-'}}"
+                            inputLabel="Person Ref. No."
+            ></app-global-label>
+
+            <app-global-label class="w-100 my-2"
+                            inputValue="{{personData?.title || ''}} {{personData?.full_name || '-'}}"
+                            inputLabel="Full Name"
+            ></app-global-label>
+          </div>
+
+          <div fxLayout="column" class="w-100">
+            <app-global-label class="w-100 my-2"
+                            inputValue="{{personData?.relationship || '-'}}" inputLabel="Relationship"
+            ></app-global-label>
+
+            <app-global-label class="w-100 my-2"
+                            inputValue="{{personData?.spouse ? 'Yes' : 'No'}}" inputLabel="Spouse"
+            ></app-global-label>
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start start">
+          <mat-radio-group fxLayout="row" fxLayoutGap="2rem" class="mb-2"
+                           color="primary" formControlName="localOrForeignBank"
+                           (change)="onRadioButtonChange($event.value)">
+            <mat-radio-button value="local">Local Bank Account</mat-radio-button>
+            <mat-radio-button value="foreign">Foreign Bank Account</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <div fxLayout="row" class="my-3">
+          <app-global-label class="w-100"
+                          inputLabel="Currency Type"
+                          [inputValue]="formControls.currencyType.value">
+          </app-global-label>
+          <div class="w-100"></div>
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="1rem">
+          <div fxLayout="column" class="w-100">
+            <!--            <mat-form-field class="w-100">-->
+            <!--              <input type="text" matInput name="currencyType" formControlName="currencyType"-->
+            <!--                     placeholder="Currency Type" readonly matTooltip="Read Only">-->
+            <!--            </mat-form-field>-->
+
+            <mat-form-field class="w-100">
+              <input type="text" matInput name="branchNameInput" formControlName="branchNameInput"
+                     placeholder="Branch Name" required>
+              <mat-error *ngIf="formControls.branchNameInput.invalid && formControls.branchNameInput.errors?.required">
+                • Branch Name is required
+              </mat-error>
+              <mat-error *ngIf="formControls.branchNameInput.invalid && formControls.branchNameInput.errors?.maxlength">
+                • Branch Name can only consist 255 characters
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="w-100">
+              <input type="text" matInput name="branchAddressLine1" formControlName="branchAddressLine1"
+                     placeholder="Branch Address Line 1"
+                     [required]="formControls.localOrForeignBank.value === 'foreign'">
+              <mat-error *ngIf="formControls.branchAddressLine1.invalid && formControls.branchAddressLine1.errors?.required">
+                • Address Line 1 is required
+              </mat-error>
+              <mat-error *ngIf="formControls.branchAddressLine1.invalid && formControls.branchAddressLine1.errors?.maxlength">
+                • Address Line 1 can only consist 100 characters
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="w-100">
+              <input type="text" matInput name="branchAddressLine2" formControlName="branchAddressLine2"
+                     placeholder="Branch Address Line 2">
+              <mat-error *ngIf="formControls.branchAddressLine2.invalid && formControls.branchAddressLine2.errors?.maxlength">
+                • Address Line 2 can only consist 50 characters
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="w-100">
+              <input type="text" matInput name="branchAddressLine3" formControlName="branchAddressLine3"
+                     placeholder="Branch Address Line 3">
+              <mat-error *ngIf="formControls.branchAddressLine3.invalid && formControls.branchAddressLine3.errors?.maxlength">
+                • Address Line 3 can only consist 50 characters
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="w-100">
+              <input type="text" matInput name="branchCity" formControlName="branchCity"
+                     placeholder="Branch City">
+              <mat-error *ngIf="formControls.branchCity.invalid && formControls.branchCity.errors?.required">
+                • Branch City is required
+              </mat-error>
+              <mat-error *ngIf="formControls.branchCity.invalid && formControls.branchCity.errors?.maxlength">
+                • Branch City can only consist 50 characters
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div fxLayout="column" class="w-100">
+            <mat-form-field class="w-100">
+              <input type="text" matInput name="accountNo" formControlName="accountNo"
+                     (input)="onAccountNoInputChange()"
+                     placeholder="Account No." required>
+              <mat-error *ngIf="formControls.accountNo.invalid && formControls.accountNo.errors?.required">
+                • Account No. is required
+              </mat-error>
+              <mat-error *ngIf="formControls.accountNo.invalid && formControls.accountNo.errors?.maxlength">
+                • Account No. can only consist 100 characters
+              </mat-error>
+              <mat-error *ngIf="formControls.accountNo.invalid && formControls.accountNo.errors?.pattern">
+                • Account No. is not valid
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="w-100">
+              <input type="text" matInput name="reEnterAccountNo" formControlName="reEnterAccountNo"
+                     placeholder="Re Enter Account No." required>
+              <mat-error
+                *ngIf="formControls.reEnterAccountNo.invalid && formControls.reEnterAccountNo.errors?.required">
+                • Re Enter Account No. is required
+              </mat-error>
+              <mat-error
+                *ngIf="formControls.reEnterAccountNo.invalid && formControls.reEnterAccountNo.errors?.mustMatch">
+                • Re Enter Account No. does not match
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="w-100">
+              <input type="text" matInput name="swiftCode" formControlName="swiftCode"
+                     placeholder="Swift Code" required>
+              <mat-error *ngIf="formControls.swiftCode.invalid && formControls.swiftCode.errors?.required">
+                • Swift Code is required
+              </mat-error>
+              <mat-error *ngIf="formControls.swiftCode.invalid && formControls.swiftCode.errors?.maxlength">
+                • Swift Code can only consist 100 characters
+              </mat-error>
+              <mat-error *ngIf="formControls.swiftCode.invalid && formControls.swiftCode.errors?.pattern">
+                • Swift Code is not valid
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="w-100">
+              <input type="text" matInput name="ibnNo" formControlName="ibnNo"
+                     placeholder="IBN No." required>
+              <mat-error *ngIf="formControls.ibnNo.invalid && formControls.ibnNo.errors?.required">
+                • IBN No. is required
+              </mat-error>
+              <mat-error *ngIf="formControls.ibnNo.invalid && formControls.ibnNo.errors?.maxlength">
+                • IBN No. can only consist 100 characters
+              </mat-error>
+              <mat-error *ngIf="formControls.ibnNo.invalid && formControls.ibnNo.errors?.pattern">
+                • IBN No. is not valid
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="1rem" class="w-100">
+          <mat-form-field class="w-100">
+        <textarea matInput
+                  placeholder="Claim Note" formControlName="claimNote" rows="2"></textarea>
+            <mat-error *ngIf="formControls.claimNote.invalid && formControls.claimNote.errors?.maxlength">
+              • Claim Note can only consist 200 characters
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="1rem" class="my-3">
+          <button type="button" mat-raised-button color="primary" (click)="onSave()">
+            <i class="material-icons mr-2 pb-1">save</i> Save
+          </button>
+
+          <button (click)="onCancel()" type="button" mat-raised-button class="btn-cancel"><i
+            class="material-icons mr-2">settings_backup_restore</i>Cancel
+          </button>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</section>

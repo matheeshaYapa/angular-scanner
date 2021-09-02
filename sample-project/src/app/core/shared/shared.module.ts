@@ -26,14 +26,14 @@ export const MY_FORMATS = {
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
   ],
   exports: [
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
   ],
   providers: [
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},

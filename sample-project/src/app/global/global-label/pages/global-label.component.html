@@ -1,1 +1,26 @@
-<p>global-label works!</p>
+<div class="container label-row" fxLayout fxLayout.xs="column" fxLayoutAlign="start start" fxLayoutGap="10px" fxLayoutGap.xs="0"
+     [ngClass]="{'asterisk-green-border':asteriskMarkVisible, 'asterisk-red-border': inputWaring}" fxFlex="100%">
+  <!-- <div [matMenuTriggerFor]="menu"  (mouseenter)="openMyMenu()" class="item item-1" fxFlex="1%"
+    fxFlexOrder="1">
+    <span class="item-label" *ngIf="inputLabel!='' && inputLabel != null"
+      [ngClass]="{'highlight-item-label': inputHighlight}">•</span>
+  </div> -->
+  <div class="item item-1" fxFlex="48%" fxFlexOrder="1">
+    <span class="item-label" [ngClass]="[inputHighlight ? 'highlight-item-label': '', inputWaring? 'text-red': '' ]">
+      {{inputLabel}}</span>
+  </div>
+  <div class="item item-2" fxFlex="2%" fxFlexOrder="2"><span class="item-label"
+                                                             *ngIf="inputLabel!='' && inputLabel != null"> :</span></div>
+  <div class="item item-3" fxFlex="48%" fxFlexOrder="3" *ngIf="!inputPill"><span class="item-value "
+                                                                                 [ngClass]="{'highlight-item-value': inputHighlight, 'charcater-limit-50': inputNoteTrim, 'text-red': inputWaring}"> {{inputValue}}</span>
+  </div>
+</div>
+
+<mat-menu #menu="matMenu" overlapTrigger="false">
+  <div class="my-hover-nav" (mouseleave)="closeMyMenu()">
+    <a mat-menu-item (click)="copyInputMessage()">
+      <i class="fas fa-copy mr-2"></i>
+      <span matTooltip="Copy to Clipboard">Copy</span>
+    </a>
+  </div>
+</mat-menu>

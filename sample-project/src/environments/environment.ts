@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  BASE_META_URL: 'http://etf.bu1.inova.lk/meta',
+  BASE_DATA_URL: 'http://etf.bu1.inova.lk',
 };
 
 /*

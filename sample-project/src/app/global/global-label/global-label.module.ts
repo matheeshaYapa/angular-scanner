@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GlobalLabelComponent } from './pages/global-label.component';
+import {SharedModule} from "../../core/shared/shared.module";
 
 
 
@@ -8,8 +9,12 @@ import { GlobalLabelComponent } from './pages/global-label.component';
   declarations: [
     GlobalLabelComponent
   ],
+  exports: [
+    GlobalLabelComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule
   ]
 })
 export class GlobalLabelModule { }

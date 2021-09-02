@@ -14,12 +14,12 @@ const routes: Routes = [
       },
       {
         path: 'dashboard',
-        redirectTo: '/admin',
+        redirectTo: '/protected',
         pathMatch: 'full'
       },
       {
         path: 'sample',
-        loadChildren: () => import('src/app/protected/modules/samle-module/samle-module.module').then(m => m.SamleModuleModule)
+        loadChildren: () => import('src/app/protected/modules/samle-module/sample-module.module').then(m => m.SampleModuleModule)
       }
     ]
   }
