@@ -5,6 +5,8 @@ import { MaterialModule } from './material.module';
 
 import {MAT_DATE_FORMATS} from '@angular/material/core';
 import {FlexLayoutModule} from "@angular/flex-layout";
+import { DateFormatPipe } from '../pipes/date-format.pipe';
+import { DateTimeFormatPipe } from '../pipes/date-time-format.pipe';
 
 export const MY_FORMATS = {
   parse: {
@@ -20,16 +22,20 @@ export const MY_FORMATS = {
 
 @NgModule({
   declarations: [
+    DateTimeFormatPipe,
+    DateFormatPipe
   ],
   imports: [
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
   ],
   exports: [
     CommonModule,
+    DateFormatPipe,
+    DateTimeFormatPipe,
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
@@ -40,5 +46,4 @@ export const MY_FORMATS = {
   ],
 
 })
-export class SharedModule {
-}
+export class SharedModule {}
