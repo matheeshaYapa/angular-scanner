@@ -1,1 +1,8 @@
 <router-outlet></router-outlet>
+
+<input type="file" (change)="test($any($event.target).files)">
+
+
+<img *ngIf="image" [src]="image" alt="ALT" height="100">
+
+<img [src]="'http://localhost/img/2848_00013.jpg'" alt="ALT" height="500">

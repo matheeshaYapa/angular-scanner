@@ -1,0 +1,17 @@
+<div class="w-100 mt-4" fxLayout="row" fxLayoutAlign="start end">
+  <div fxLayout.gt-sm="row" class="w-20">
+    <button mat-raised-button class="btn-create" type="button" (click)="fileInput.click()">
+      <span>Choose File...</span>
+      <input #fileInput type="file" [accept]="acceptedFileFormatList" (change)="onFileInput($event)"
+             style="display:none;">
+    </button>
+  </div>
+  <div fxLayout.gt-sm="row" class="w-80 ml-2 align-items-center">
+    <span class="item-value">{{selectedDocumentName}}</span>
+  </div>
+</div>
+
+<!-- <div class="w-100 mt-4" fxLayout="row" fxLayoutAlign="center">
+  <button [disabled]="!isUploadButtonEnabled" (click)="onUploadClick()" type="button" mat-raised-button class="btn-search">
+    <i class="material-icons mr-2">backup</i>Upload</button>
+</div> -->

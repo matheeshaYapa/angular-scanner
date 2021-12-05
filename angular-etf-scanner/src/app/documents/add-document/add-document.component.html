@@ -1,0 +1,160 @@
+<h1 class="mat-h2 ml-3 mt-3">Add Document</h1>
+<hr>
+<mat-dialog-content>
+
+  <!-- [START] OPTION SELECTING RADIO BUTTONS -->
+  <mat-card class="card">
+    <div fxlayout="row" fxLayoutAlign="space-between center" class="w-100">
+      <div fxLayout="row" fxLayoutGap="2rem" class="w-100">
+
+        <div class="custom-control custom-radio" *ngIf="!isDocumentUpload">
+          <input class="" id="scan1" type="radio" class="custom-control-input" value="1"
+                 name="radioButton" (change)="onUploadTypeChange(1)">
+          <label class="custom-control-label pl-2" for="scan1">Scan</label>
+        </div>
+
+        <!-- ** -->
+        <div class="custom-control custom-radio" *ngIf="isDocumentUpload">
+          <input class="" id="scan2" type="radio" class="custom-control-input" value="1"
+                 name="radioButton" (change)="onUploadTypeChange(1)">
+          <label class="custom-control-label pl-2" for="scan2">Scan</label>
+        </div>
+        <!-- ** -->
+
+        <div class="custom-control custom-radio" *ngIf="!isDocumentUpload">
+          <input class="" id="upload1" type="radio" [checked]="true" class="custom-control-input" value="2" name="radioButton"
+                 (change)="onUploadTypeChange(2)">
+          <label class="custom-control-label pl-2" for="upload1">Upload</label>
+        </div>
+
+        <!-- ** -->
+        <div class="custom-control custom-radio" *ngIf="isDocumentUpload">
+          <input class="" id="upload2" type="radio" [checked]="true" class="custom-control-input" value="2" name="radioButton"
+                 (change)="onUploadTypeChange(2)">
+          <label class="custom-control-label pl-2" for="upload2">Upload</label>
+        </div>
+        <!-- ** -->
+
+        <div *ngIf="!shouldVisibleOnlyScanAndUpload" class="custom-control custom-radio">
+          <input class="" id="serviceCounterInquary" type="radio" class="custom-control-input" value="3"
+                 name="radioButton" (change)="onUploadTypeChange(3)">
+          <label class="custom-control-label pl-2" for="serviceCounterInquary">Upload from Service Counter
+            Inquiry</label>
+        </div>
+
+        <div *ngIf="!shouldVisibleOnlyScanAndUpload" class="custom-control custom-radio">
+          <input class="" id="dmuInbound" type="radio" class="custom-control-input" value="4" name="radioButton"
+                 (change)="onUploadTypeChange(4)">
+          <label class="custom-control-label pl-2" for="dmuInbound">Upload from DMU Inbound</label>
+        </div>
+
+      </div>
+    </div>
+  </mat-card>
+  <!-- [END] OPTION SELECTING RADIO BUTTONS -->
+
+  <!-- [START] DETAILS FORM -->
+  <mat-card class="card">
+    <div fxlayout="row" fxLayoutAlign="space-between center" class="w-100 mb-3">
+      <div fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutAlign="center start" fxLayoutGap="1rem" class="w-100">
+        <!-- [START] DOCUMENT DETAILS FORM -->
+        <form fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="1rem" [formGroup]="addDocumentForm"
+              class="w-100" #f="ngForm" class="w-100">
+
+          <div fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutAlign="center start" fxLayoutGap="1rem"
+               class="w-100" *ngIf="!isDocumentUpload">
+            <!-- [START] DOCUMENT TYPE -->
+            <mat-form-field class="w-50">
+              <mat-select [disabled]="isDocumentNameAndTypeLocked" id="documentType" name="documentType"
+                          placeholder="Document Type" formControlName="documentType" required="true">
+                <mat-option *ngFor="let documentType of documentTypeMasterList" [value]="documentType.id">
+                  {{documentType.name_eng}}
+                </mat-option>
+              </mat-select>
+              <mat-error
+                *ngIf="formControls?.documentType.touched && (formControls?.documentType.errors || !formControls?.documentType.valid)">
+                <mat-error *ngIf="formControls?.documentType.errors?.required">
+                  • Document Type is Required
+                </mat-error>
+              </mat-error>
+            </mat-form-field>
+            <!-- [END] DOCUMENT TYPE -->
+
+            <!-- [START] DOCUMENT NAME -->
+            <mat-form-field class="w-50">
+              <input matInput name="documentName" id="documentName" type="string" formControlName="documentName"
+                     placeholder="Document Name" required="true">
+              <mat-error
+                *ngIf="formControls?.documentName.touched && (formControls?.documentName.errors || !formControls?.documentName.valid)">
+                <mat-error *ngIf="formControls?.documentName.errors?.required">
+                  • Document Name is Required
+                </mat-error>
+                <mat-error *ngIf="formControls?.documentName.errors?.maxlength">
+                  • Document Name Can Only Consist 100 Characters
+                </mat-error>
+              </mat-error>
+            </mat-form-field>
+            <!-- [END] DOCUMENT NAME -->
+          </div>
+
+          <!-- ** -->
+          <div fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutAlign="center start" fxLayoutGap="1rem"
+               class="w-100" *ngIf="isDocumentUpload">
+            <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="2rem" class="w-100 py-2">
+              <div fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutAlign="start" fxLayoutGap="1rem" class="w-100">
+                <h6 class="w-50">
+                  Document Type
+                </h6>
+                <h6 class="w-50">
+                  Document Name
+                </h6>
+              </div>
+            </div>
+          </div>
+          <!-- ** -->
+
+          <!-- [START] NOTE -->
+          <mat-form-field class="w-100">
+            <input matInput name="note" id="note" type="string" formControlName="note" placeholder="Note">
+            <mat-error
+              *ngIf="formControls?.note.touched && (formControls?.note.errors || !formControls?.note.valid)">
+              <mat-error *ngIf="formControls?.note.errors?.maxlength">
+                • Note Can Only Consist 200 Characters
+              </mat-error>
+            </mat-error>
+          </mat-form-field>
+          <!-- [END] NOTE -->
+
+        </form>
+        <!-- [END] DOCUMENT DETAILS FORM -->
+
+      </div>
+    </div>
+  </mat-card>
+  <!-- [END] DETAILS FORM -->
+
+  <!-- [START] DOCUMENT UPLOAD FUNCTIONS -->
+  <mat-card class="card">
+
+    <app-scan-document *ngIf="currentUploadType === 'scan'" (readableStatusChange)="onCompleteStatusChange($event)"
+                       (completeStatusChange)="onCompleteStatusChange($event)" (scanDocument)="onDocumentScan($event)">
+    </app-scan-document>
+
+    <app-upload-document *ngIf="currentUploadType === 'upload'" (fileSelect)="onFilesSelect($event)">
+    </app-upload-document>
+
+  </mat-card>
+  <!-- [END] DOCUMENT UPLOAD FUNCTIONS -->
+
+</mat-dialog-content>
+
+<!-- [START] BUTTONS -->
+<div fxLayout="row" fxLayoutAlign="center" class="w-100">
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" class="w-100 mt-2 mb-3">
+    <button type="button" (click)="onSubmit()" mat-raised-button class="btn-create">
+      <i class="fas fa-plus mr-2 pb-1"></i>Add</button>
+    <button type="button" mat-raised-button class="btn-cancel" (click)="onCancelClick()"><i
+      class="material-icons mr-2">settings_backup_restore</i>Cancel</button>
+  </div>
+</div>
+<!-- [END] BUTTONS -->

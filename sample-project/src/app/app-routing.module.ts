@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import {NotFoundComponent} from "./core/pages/not-found/not-found.component";
 
 const routes: Routes = [
   {
@@ -10,15 +11,15 @@ const routes: Routes = [
     path: 'protected',
     loadChildren: () => import('src/app/protected/protected.module').then(m => m.ProtectedModule)
   },
-  // {
-  //   path: 'not-found',
-  //   component: NotFoundComponent
-  // },
-  // {
-  //   path: '**',
-  //   redirectTo: '/not-found',
-  //   pathMatch: 'full'
-  // }
+  {
+    path: 'not-found',
+    component: NotFoundComponent
+  },
+  {
+    path: '**',
+    redirectTo: '/not-found',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({

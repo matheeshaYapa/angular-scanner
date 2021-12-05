@@ -7,6 +7,7 @@ import {MAT_DATE_FORMATS} from '@angular/material/core';
 import {FlexLayoutModule} from "@angular/flex-layout";
 import { DateFormatPipe } from '../pipes/date-format.pipe';
 import { DateTimeFormatPipe } from '../pipes/date-time-format.pipe';
+import {RouterModule} from "@angular/router";
 
 export const MY_FORMATS = {
   parse: {
@@ -30,6 +31,7 @@ export const MY_FORMATS = {
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
+    RouterModule,
     FlexLayoutModule,
   ],
   exports: [
@@ -39,6 +41,7 @@ export const MY_FORMATS = {
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
+    RouterModule,
     FlexLayoutModule,
   ],
   providers: [
